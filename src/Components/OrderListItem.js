@@ -3,10 +3,12 @@ import styled from 'styled-components';
 import trashImage from '../img/trash.png';
 import { TotalPriceItems } from './secondaryFunction';
 import { formatCurrency } from './secondaryFunction';
+import { Toppings } from './Toppings';
 
 const  OrderItemStyled  = styled.li`
 display: flex;
 margin: 15px 0;
+flex-wrap: wrap;
 `;
 
 const ItemName = styled.span`
@@ -31,13 +33,26 @@ const TrashButton = styled.button`
   cursor: pointer;
 
 `;
+const Toppings1 = styled.div`
+   color: #9a9a9a;
+   font-size:14px;
+   width:100%;
+`;
 
-export const OrderListItem =({ order }) => (
+
+export const OrderListItem =({ order }) =>{ 
+      const topping = order.topping.filter(item => item.checked)
+      .map(item => item.name)
+      .join(', ');
+      
+      
+     return (
     <OrderItemStyled>
         <ItemName>{order.name}</ItemName>
         <span>{order.count}</span>
         <ItemPrice>{formatCurrency(TotalPriceItems(order))}</ItemPrice>
         <TrashButton/>
+        {topping && <Toppings1>Допы: {topping}</Toppings1>}
     </OrderItemStyled>
 
-);
+)};

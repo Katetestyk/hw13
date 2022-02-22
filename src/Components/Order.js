@@ -12,7 +12,7 @@ const OrderStyled = styled.section`
    top: 80px;
    left: 0;
    background: #fff;
-   min-width: 360px;
+   width: 360px;
    height: calc(100% - 80px);
    box-shadow: 3px 4px 5px rgba(0, 0, 0, 0.25);
    padding: 20px;
@@ -48,7 +48,10 @@ const Total = styled.div`
 export const Order = ({ orders }) => {
 
      const total = orders.reduce((result, order)=>
-        TotalPriceItems(order + result), 0)
+        TotalPriceItems(order + result), 0);
+
+    const totalCounter = orders.reduce((result, order)=>
+             order.count + result, 0);
 
     return(
         <OrderStyled>
@@ -62,7 +65,7 @@ export const Order = ({ orders }) => {
          </OrderContent>             
          <Total>
               <span>Итого </span>  
-             <span>5 </span> 
+             <span>{totalCounter}</span> 
              <TotalPrice>{formatCurrency(total)} </TotalPrice>            
              
          </Total>
