@@ -6,7 +6,10 @@ import { useCount} from './useCount';
 import { TotalPriceItems } from './secondaryFunction';
 import { formatCurrency } from './secondaryFunction';
 import { Toppings} from './Toppings';
+import { Choices } from './Choices';
 import { useToppings } from './useToppings';
+import { useChoices } from './useChoices';
+
 
 
 
@@ -64,6 +67,7 @@ const TotalPriceItem = styled.div`
     
     const counter = useCount();
     const toppings = useToppings(openItem);
+    const choices = useChoices(openItem);
 
     const  closeModal = e => {
         if(e.target.id ==='overlay'){
@@ -73,7 +77,8 @@ const TotalPriceItem = styled.div`
     const order = {
        ...openItem,
        count: counter.count,
-       topping: toppings.toppings
+       topping: toppings.toppings,
+       choice: choices.choice,
     };
 
     
@@ -94,12 +99,16 @@ const TotalPriceItem = styled.div`
                   </HeaderContent> 
                   <CountItem {...counter}/> 
                   {openItem.toppings && <Toppings {...toppings} />}
+                  {openItem.choices && <Choices {...choices} openItem={openItem} />}
                   <TotalPriceItem>
                       <span>Цена: </span>
                       <span>{formatCurrency(TotalPriceItems(order))} </span>
                   </TotalPriceItem>   
                                   
-                  <ButtonCheckout onClick={addToOrder}>Добавить</ButtonCheckout>                  
+                  <ButtonCheckout 
+                  onClick={addToOrder}
+                  disabled={order.choices && !order.choice}
+                  >Добавить</ButtonCheckout>                  
                </Content>
           </Modal>
 
