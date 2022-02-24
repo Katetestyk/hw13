@@ -31,22 +31,49 @@ const ImgLogo = styled.img`
 width: 50px;
 `;
 const Login = styled.button`
+background-color: transparent;
 border-color: transparent;
 color: white;
-background-color: transparent;
 font-size: 16px;
-border-color: transparent;
 `;
-export const NavBar =() => (
+ const User = styled.div`
+ display: flex;
+ align-items: center;
+ text-align: center;
+ 
+ `;
+
+ const LogOut = styled.span`
+   font-size: 20px;
+   font-weight: 700px;
+   cursor: pointer;  
+   margin-right:30px;
+ `;
+
+ const Figure = styled.figure`
+     margin: 0 30px;
+ `;
+
+export const NavBar =({ authentication, logIn, logOut }) => (
     
     <NavBarStyled>
         <Logo>
           <ImgLogo src={logoImg} alt="лого"/>
           <H1>McDonald's</H1>
         </Logo>
-        <Login>
+        {authentication ? 
+             <User>
+                <Figure>                 
+                    <img src={siginImg} alt={authentication.displayName}/>
+                    <figcaption>{authentication.displayName}</figcaption>
+                </Figure>
+                <LogOut title="Выйти" onClick={LogOut}>х</LogOut>
+             </User>:       
+        <Login onClick={logIn}>
+          <figure>
           <img src={siginImg} alt="войти"/>
-          <p>войти</p>
-        </Login>
+          <figcaption> войти</figcaption>
+          </figure>          
+        </Login>}
     </NavBarStyled>  
 );
