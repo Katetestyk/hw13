@@ -16,6 +16,7 @@ import 'firebase/compat/auth';
 import { useTitle } from './Components/useTitle';
 import { OrderConfirm } from './Components/OrderConfirm';
 import { useOrderConfirm } from './Components/useOrderConfirm';
+import { Context } from './Components/context';
 
 const firebaseConfig = {
   apiKey: "AIzaSyDEJ0_nzPtsITEav_ka77apl6atlejsSRU",
@@ -36,9 +37,12 @@ function App() {
   useTitle(openItem.openItem);
  
   return (
-    <>
+    <Context.Provider value={{
+      auth,
+       openItem
+    }}>
        <GlobalStyle/>
-       <NavBar {...auth}/>
+       <NavBar/>
        <Order 
             {...orders}
             {...openItem}
@@ -46,12 +50,12 @@ function App() {
             
             {...orderConfirm}
             />
-       <Menu {...openItem} />
+       <Menu  />
        { openItem.openItem && <ModalItem {...openItem}  {...orders} />}
        {orderConfirm.openOrderConfirm &&
           <OrderConfirm {...orders} {...auth } {...orderConfirm} 
           firebaseDatabase={firebase.database}/>}
-    </>
+    </Context.Provider>
   );
 }
 
