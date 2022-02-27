@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { ButtonCheckout } from './ButtonCheckout';
 import { CountItem } from './CountItem';
@@ -9,6 +9,7 @@ import { Toppings} from './Toppings';
 import { Choices } from './Choices';
 import { useToppings } from './useToppings';
 import { useChoices } from './useChoices';
+import { Context } from './context';
 
 
 
@@ -63,8 +64,14 @@ const TotalPriceItem = styled.div`
 `;
   
 
- export const ModalItem = ({ openItem, setOpenItem, orders, setOrders }) => {
+ export const ModalItem = () => {
     
+    const {
+        orders: { orders, setOrders },
+        openItem: { openItem, setOpenItem }
+         
+    } = useContext(Context);
+
     const counter = useCount(openItem.count);
     const toppings = useToppings(openItem);
     const choices = useChoices(openItem);

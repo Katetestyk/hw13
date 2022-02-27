@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { ButtonCheckout } from './ButtonCheckout';
 import { OrderListItem } from './OrderListItem';
-import { TotalPriceItems } from './secondaryFunction';
-import { formatCurrency } from './secondaryFunction';
-import { projection } from './secondaryFunction';
+import { TotalPriceItems, formatCurrency } from './secondaryFunction';
+import { Context } from './context';
+
 
 const OrderStyled = styled.section`
    position: fixed;
@@ -46,19 +46,13 @@ export const Total = styled.div`
  
   
 
-export const Order = ({
-     orders, 
-     setOrders, 
-     setOpenItem, 
-     authentication, 
-     logIn,    
-     setOpenOrderConfirm
-    }) => {
-     
+export const Order = () => {
 
-     
-
-
+        const {
+            auth: { authentication, logIn },
+            orders: { orders, setOrders }, 
+            orderConfim: { setOpenOrderConfirm },
+        } = useContext(Context);     
 
      const deleteItem = index => {
          const newOrders = orders.filter((item, i) =>
@@ -83,12 +77,14 @@ export const Order = ({
                      order={order}
                      deleteItem={deleteItem}
                      index={index}
-                     setOpenItem={setOpenItem}
+                     
                      />)}
              </OrderList> :
              <EmptyList>Список заказов пуст</EmptyList>}
          </OrderContent>             
-         <Total>
+         {orders.length ?
+             <>
+             <Total>
               <span>Итого </span>  
              <span>{totalCounter}</span> 
              <TotalPrice>{formatCurrency(total)} </TotalPrice>            
@@ -101,6 +97,8 @@ export const Order = ({
                  logIn()
              }
          }}>Оформить</ButtonCheckout>
+             </> : null
+         }
         </OrderStyled>
     )
 }
