@@ -56,7 +56,7 @@ export const OrderConfirm = () => {
                 <Modal>
                     <OrderTitle>{authentication.displayName}</OrderTitle>
                     <Total>
-                        <span>Bтого</span>
+                        <span>Итого</span>
                         <TotalPrice>{formatCurrency(total)}</TotalPrice>
                     </Total>
                     <ButtonCheckout

@@ -18,7 +18,6 @@ const SectionMenu = styled.section`
  export const Menu = () => {
     
     const res = useFetch();
-
     const dbMenu = res.response;
 
      return (

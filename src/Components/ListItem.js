@@ -41,7 +41,7 @@ const Item = styled.li`
    }
 `;
 
-export const ListItem = ({itemList }) => {
+export const ListItem = ({ itemList }) => {
     const { openItem: { setOpenItem } } = useContext(Context);
     return (
             <List>

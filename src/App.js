@@ -1,9 +1,9 @@
 
 import './App.css';
 import React from 'react';
-import * as firebase from 'firebase/app';
-import 'firebase/auth';
-import 'firebase/database';
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/auth';
+import 'firebase/compat/database';
 import { NavBar} from './Components/NavBar';
 import { Menu } from  './Components/Menu';
 import { GlobalStyle }  from './Components/GlobalStyle';
@@ -12,7 +12,6 @@ import { Order } from './Components/Order';
 import { useOpenItem} from './Components/Hooks/useOpenItem';
 import { useOrders} from './Components/Hooks/useOrders';
 import { useAuth } from './Components/useAuth';
-import 'firebase/compat/auth';
 import { useTitle } from './Components/useTitle';
 import { OrderConfirm } from './Components/OrderConfirm';
 import { useOrderConfirm } from './Components/useOrderConfirm';

@@ -33,7 +33,7 @@ export const Total = styled.div`
  & span:first-child {
      flex-grow: 1;
      margin:  0 0 5px;
- }
+ };
  `;
   export const TotalPrice = styled.span`
       text-align: right;
@@ -43,15 +43,13 @@ export const Total = styled.div`
   const EmptyList = styled.p`
      text-align: center;
   `;
- 
-  
-
+   
 export const Order = () => {
 
         const {
             auth: { authentication, logIn },
             orders: { orders, setOrders }, 
-            orderConfim: { setOpenOrderConfirm },
+            orderConfirm: { setOpenOrderConfirm }
         } = useContext(Context);     
 
      const deleteItem = index => {
@@ -77,7 +75,6 @@ export const Order = () => {
                      order={order}
                      deleteItem={deleteItem}
                      index={index}
-                     
                      />)}
              </OrderList> :
              <EmptyList>Список заказов пуст</EmptyList>}
@@ -87,12 +84,11 @@ export const Order = () => {
              <Total>
               <span>Итого </span>  
              <span>{totalCounter}</span> 
-             <TotalPrice>{formatCurrency(total)} </TotalPrice>            
-             
+             <TotalPrice>{formatCurrency(total)} </TotalPrice>  
          </Total>
          <ButtonCheckout onClick={() => {
              if (authentication) {
-                 setOpenOrderConfirm(true);
+                 setOpenOrderConfirm (true);
              } else {
                  logIn()
              }

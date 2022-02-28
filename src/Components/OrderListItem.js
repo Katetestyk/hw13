@@ -41,9 +41,10 @@ const Toppings1 = styled.div`
 `;
 
 
-export const OrderListItem =({ order, index, deleteItem }) =>{ 
+export const OrderListItem =({ order, index, deleteItem }) => { 
 
        const { openItem: { setOpenItem } } = useContext(Context);
+       
       const topping = order.topping.filter(item => item.checked)
       .map(item => item.name)
       .join(', ');
