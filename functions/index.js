@@ -13,15 +13,23 @@ const transporter = nodemailer.createTransport({
 
 transporter.use('compile', htmlToText());
 
-const sendOrderEmail = order => {
+const sendOrderEmail = data => {
    const options = {
-      from: `Mrdonald's`,
-      to: email,
+      from: `Mrdonald's <${email}>`,
+      to: data.email,
       subject: `Ваш заказ из MRDonald's`,
       html: `
            <div>
-               <h2>Добрый день</h2>
+               <h2>Добрый день ${order.nameClient}</h2>
                <h3>Ваш заказ:</h3>
+               <ul>
+                 ${data.order.map(({ itemName, count, price }) => (
+                         `<li>${itemName} - ${count}шт., цена ${price * count} руб. </li>`
+                 ))}               
+               </ul>
+               <p>Итого: ${data.order.recuce((sum, item) => 
+                sum + (item.price + item.count), 0)} руб.</p>
+                <small>Ожидайте курьера.</small>
            </div>
       `,
    };
